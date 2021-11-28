@@ -4,17 +4,22 @@ import java.util.UUID;
 
 public abstract class AbstractUser {
 
-    private String id;
+    public final String id;
 
-    private String firstName;
+    public String firstName;
 
-    private String lastName;
+    public String lastName;
 
-    private UserRole userRole;
+    public UserRole userRole;
 
     private SubscriptionType subscriptionType;
 
-    private String imagePath;
+    public String imagePath;
+
+    public AbstractUser() {
+        this.id = UUID.randomUUID().toString();
+        // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    }
 
     public AbstractUser(String firstName, String lastName, UserRole userRole, SubscriptionType subscriptionType) {
         this.id = UUID.randomUUID().toString();
@@ -23,6 +28,10 @@ public abstract class AbstractUser {
         this.userRole = userRole;
         this.subscriptionType = subscriptionType;
         this.imagePath = "src/main/res/drawable/anonim.png";
+    }
+
+    public String getId(){
+        return id;
     }
 
     public String getFirstName(){
