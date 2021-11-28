@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Tutors</string>
+    <string name="btnSearchValue">Поиск репетитора</string>
 </resources>
