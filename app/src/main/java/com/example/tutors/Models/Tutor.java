@@ -14,12 +14,11 @@ public class Tutor extends AbstractUser{
 
     }
 
-    public Tutor(String firstName, String lastName, List<ItemsTypes> items)
     private String description;
 
     private float rating;
 
-    public Tutor(String firstName, String lastName, ItemsTypes[] items)
+    public Tutor(String firstName, String lastName, List<ItemsTypes> items)
     {
         super(firstName, lastName, UserRole.TUTOR, SubscriptionType.BASE);
 
@@ -27,7 +26,7 @@ public class Tutor extends AbstractUser{
         this.rating = 0.0f;
     }
 
-    public ItemsTypes[] getItems()
+    public List<ItemsTypes> getItems()
     {
         return this.items;
     }
