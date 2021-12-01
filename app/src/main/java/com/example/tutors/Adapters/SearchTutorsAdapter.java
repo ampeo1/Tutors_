@@ -10,10 +10,17 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.example.tutors.Models.ItemsTypes;
 import com.example.tutors.Models.Tutor;
 import com.example.tutors.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,13 +32,30 @@ public class SearchTutorsAdapter extends BaseAdapter implements Filterable {
     private ItemFilter itemFilter;
     private ArrayList<Tutor> filteredData;
 
-    public SearchTutorsAdapter(Context context, ArrayList<Tutor> tutors) {
+    public SearchTutorsAdapter(Context context, DatabaseReference tutorsRef) {
         ctx = context;
-        this.tutors = tutors;
+        this.tutors = new ArrayList<>();
         lInflater = (LayoutInflater) ctx
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         itemFilter = new ItemFilter();
-        filteredData = tutors;
+        filteredData = this.tutors;
+
+        tutorsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot tutorShanpshot: snapshot.getChildren()) {
+                    Tutor tutor = tutorShanpshot.getValue(Tutor.class);
+                    tutors.add(tutor);
+                }
+
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -91,7 +115,7 @@ public class SearchTutorsAdapter extends BaseAdapter implements Filterable {
             else{
                 ArrayList<Tutor> filteredList = new ArrayList<>();
                 for(Tutor tutor: tutors){
-                    if(Arrays.asList(tutor.getItems()).contains(ItemsTypes.valueOf(constraint.toString())))
+                    if(tutor.getItems().contains(ItemsTypes.valueOf(constraint.toString().replace(' ', '_'))))
                     {
                         filteredList.add(tutor);
                     }

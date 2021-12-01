@@ -5,5 +5,9 @@ public enum ItemsTypes {
     MATHS,
     RUSSIAN_LANGUAGE,
     PHYSICS,
-    CHEMISTRY
+    CHEMISTRY,
+
+    ItemsTypes() {
+
+    }
 }

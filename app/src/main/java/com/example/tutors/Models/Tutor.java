@@ -1,14 +1,24 @@
 package com.example.tutors.Models;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.util.List;
+
+@IgnoreExtraProperties
 public class Tutor extends AbstractUser{
 
-    private ItemsTypes[] items;
+    public List<ItemsTypes> items;
+
+    public Tutor(){
+        super();
+
+    }
 
     private String description;
 
     private float rating;
 
-    public Tutor(String firstName, String lastName, ItemsTypes[] items)
+    public Tutor(String firstName, String lastName, List<ItemsTypes> items)
     {
         super(firstName, lastName, UserRole.TUTOR, SubscriptionType.BASE);
 
@@ -16,7 +26,7 @@ public class Tutor extends AbstractUser{
         this.rating = 0.0f;
     }
 
-    public ItemsTypes[] getItems()
+    public List<ItemsTypes> getItems()
     {
         return this.items;
     }
