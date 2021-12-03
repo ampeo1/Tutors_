@@ -2,6 +2,7 @@ package com.example.tutors.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.tutors.R;
+import com.example.tutors.ViewModels.SignInViewModel;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -29,11 +31,13 @@ import java.util.List;
 
 public class GoogleSignInActivity extends AppCompatActivity {
 
+    private SignInViewModel viewModel;
     private static final int RC_SIGN_IN = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.viewModel = new ViewModelProvider(this).get(SignInViewModel.class);
         this.logIn();
     }
 
@@ -53,8 +57,10 @@ public class GoogleSignInActivity extends AppCompatActivity {
     }
 
     private void logIn() {
-        ArrayList<AuthUI.IdpConfig> providers = new ArrayList<>();
-        providers.add(new AuthUI.IdpConfig.GoogleBuilder().build());
-        startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(providers).build(), RC_SIGN_IN);
+        startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(viewModel.getProviders()).build(), RC_SIGN_IN);
+    }
+
+    private void addUser(){
+
     }
 }

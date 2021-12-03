@@ -17,9 +17,11 @@ import androidx.annotation.NonNull;
 import com.example.tutors.Models.ItemsTypes;
 import com.example.tutors.Models.Tutor;
 import com.example.tutors.R;
+import com.google.android.gms.common.util.ArrayUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class SearchTutorsAdapter extends BaseAdapter implements Filterable {
     private ItemFilter itemFilter;
     private ArrayList<Tutor> filteredData;
 
-    public SearchTutorsAdapter(Context context, DatabaseReference tutorsRef) {
+    public SearchTutorsAdapter(Context context, Query tutorsRef) {
         ctx = context;
         this.tutors = new ArrayList<>();
         lInflater = (LayoutInflater) ctx
@@ -43,9 +45,8 @@ public class SearchTutorsAdapter extends BaseAdapter implements Filterable {
         tutorsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot tutorShanpshot: snapshot.getChildren()) {
-                    Tutor tutor = tutorShanpshot.getValue(Tutor.class);
-                    tutors.add(tutor);
+                for (DataSnapshot tutorSnapshots: snapshot.getChildren()) {
+                    tutors.add(tutorSnapshots.getValue(Tutor.class));
                 }
 
                 notifyDataSetChanged();
