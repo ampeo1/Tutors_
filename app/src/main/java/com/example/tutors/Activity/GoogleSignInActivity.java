@@ -59,8 +59,4 @@ public class GoogleSignInActivity extends AppCompatActivity {
     private void logIn() {
         startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(viewModel.getProviders()).build(), RC_SIGN_IN);
     }
-
-    private void addUser(){
-
-    }
 }

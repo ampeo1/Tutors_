@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FirebaseHelper.addUser(new Tutor("Aleh", "Yahaudzik", Arrays.asList(ItemsTypes.MATHS)));
         setContentView(R.layout.activity_main);
         setupButtons();
     }
