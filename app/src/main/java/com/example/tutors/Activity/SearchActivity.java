@@ -33,16 +33,15 @@ public class SearchActivity extends AppCompatActivity {
 
     private void setupSpinner(SearchTutorsAdapter searchTutorsAdapter) {
         Spinner filterSpinner = findViewById(R.id.filterItemsSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, getSubjects());
-
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.items_array_rus, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         filterSpinner.setAdapter(adapter);
 
         filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-
-                searchTutorsAdapter.getFilter().filter(filterSpinner.getSelectedItem().toString());
+                searchTutorsAdapter.getFilter().filter(Long.toString(filterSpinner.getSelectedItemId()));
             }
 
             @Override
