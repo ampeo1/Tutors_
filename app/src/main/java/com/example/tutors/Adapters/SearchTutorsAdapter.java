@@ -74,6 +74,8 @@ public class SearchTutorsAdapter extends BaseAdapter implements Filterable {
         return position;
     }
 
+    public Tutor getTutor(int position) { return tutors.get(position); }
+
     public void add(Tutor tutor)
     {
         filteredData.add(tutor);

@@ -1,11 +1,13 @@
 package com.example.tutors.Models;
 
+import com.firebase.ui.auth.data.model.PhoneNumber;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.List;
 
 @IgnoreExtraProperties
-public class Tutor extends AbstractUser{
+public class Tutor extends AbstractUser {
 
     public List<ItemsTypes> items;
 
@@ -18,10 +20,11 @@ public class Tutor extends AbstractUser{
 
     private float rating;
 
-    public Tutor(String firstName, String lastName, List<ItemsTypes> items)
+    public Tutor(String firstName, String lastName, List<ItemsTypes> items, String phoneNumber, String description)
     {
-        super(firstName, lastName, UserRole.TUTOR, SubscriptionType.BASE);
+        super(firstName, lastName, UserRole.TUTOR, SubscriptionType.BASE, phoneNumber);
 
+        this.description = description;
         this.items = items;
         this.rating = 0.0f;
     }
@@ -50,14 +53,6 @@ public class Tutor extends AbstractUser{
         }
     }
 
-    public void setDescription(String description)
-    {
-        if (description.length() <= 255)
-        {
-            this.description = description;
-        }
-    }
-
     public float getRating()
     {
         return this.rating;
@@ -71,5 +66,13 @@ public class Tutor extends AbstractUser{
     public String getDescription()
     {
         return this.description;
+    }
+
+    public void setDescription(String description)
+    {
+        if (description.length() <= 255)
+        {
+            this.description = description;
+        }
     }
 }
