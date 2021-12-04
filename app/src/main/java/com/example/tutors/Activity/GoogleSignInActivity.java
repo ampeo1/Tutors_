@@ -47,16 +47,21 @@ public class GoogleSignInActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN && resultCode == RESULT_OK) {
-            finish();
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+            viewModel.setCurrentUser();
+            startActivity(MainActivity.class);
         } else {
             Toast.makeText(this, "Failed to log in. Check your password and login", Toast.LENGTH_LONG).show();
             this.logIn();
         }
     }
 
+    public void startActivity(Class<?> activityClass) {
+        finish();
+        Intent intent = new Intent(getApplicationContext(), activityClass);
+        startActivity(intent);
+    }
+
     private void logIn() {
-        startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(viewModel.getProviders()).build(), RC_SIGN_IN);
+        startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(false).setAvailableProviders(viewModel.getProviders()).build(), RC_SIGN_IN);
     }
 }
