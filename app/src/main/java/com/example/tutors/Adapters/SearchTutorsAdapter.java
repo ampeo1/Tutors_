@@ -88,8 +88,8 @@ public class SearchTutorsAdapter extends BaseAdapter implements Filterable {
 
         Tutor tutor = getTutors(position);
 
-        ((TextView) view.findViewById(R.id.itemSearchFirstName)).setText(tutor.getFirstName());
-        ((TextView) view.findViewById(R.id.itemSearchLastName)).setText(tutor.getLastName());
+        ((TextView) view.findViewById(R.id.itemSearchFirstName)).setText(tutor.getUsername());
+        ((TextView) view.findViewById(R.id.itemSearchLastName)).setText(tutor.getMail());
         ((TextView) view.findViewById(R.id.itemSearchItemsTypes)).setText(tutor.getStringItems());
         ((TextView) view.findViewById(R.id.itemSearchSubscribtionType)).setText(tutor.getSubscriptionType().toString());
         ((TextView) view.findViewById(R.id.itemSearchRaiting)).setText(tutor.getStringRating());
