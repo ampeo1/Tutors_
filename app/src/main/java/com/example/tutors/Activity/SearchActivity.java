@@ -50,7 +50,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private SearchTutorsAdapter setupListView() {
         ListView listView = findViewById(R.id.listViewTutors);
-        SearchTutorsAdapter searchTutorsAdapter = new SearchTutorsAdapter(this, FirebaseHelper.getTutorsRef());
+        SearchTutorsAdapter searchTutorsAdapter = new SearchTutorsAdapter(this, FirebaseHelper.getTutors());
         listView.setAdapter(searchTutorsAdapter);
 
         return searchTutorsAdapter;
