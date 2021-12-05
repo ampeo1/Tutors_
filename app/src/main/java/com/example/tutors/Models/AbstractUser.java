@@ -1,8 +1,9 @@
 package com.example.tutors.Models;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class AbstractUser {
+public abstract class AbstractUser implements Serializable {
 
     public String id;
 
@@ -16,16 +17,19 @@ public abstract class AbstractUser {
 
     public String imagePath;
 
+    public String phoneNumber;
+
     public AbstractUser() {
     }
 
-    public AbstractUser(String id, String username, String mail, UserRole userRole, SubscriptionType subscriptionType) {
-        this.id = id;
-        this.username = username;
-        this.mail = mail;
+    public AbstractUser(String firstName, String lastName, UserRole userRole, SubscriptionType subscriptionType, String phoneNumber) {
+        this.id = UUID.randomUUID().toString();
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.userRole = userRole;
         this.subscriptionType = subscriptionType;
         this.imagePath = "src/main/res/drawable/anonim.png";
+        this.phoneNumber = phoneNumber;
     }
 
     public String getId(){
@@ -43,4 +47,8 @@ public abstract class AbstractUser {
     public String getImagePath() { return this.imagePath; }
 
     public SubscriptionType getSubscriptionType() { return this.subscriptionType; }
+
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
 }

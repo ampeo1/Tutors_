@@ -2,6 +2,7 @@ package com.example.tutors.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import com.example.tutors.Models.ItemsTypes;
 import com.example.tutors.Models.Tutor;
@@ -26,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SearchTutorsAdapter extends BaseAdapter implements Filterable {
     private Context ctx;
@@ -74,11 +77,14 @@ public class SearchTutorsAdapter extends BaseAdapter implements Filterable {
         return position;
     }
 
+    public Tutor getTutor(int position) { return tutors.get(position); }
+
     public void add(Tutor tutor)
     {
         filteredData.add(tutor);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
@@ -87,10 +93,11 @@ public class SearchTutorsAdapter extends BaseAdapter implements Filterable {
         }
 
         Tutor tutor = getTutors(position);
-
-        ((TextView) view.findViewById(R.id.itemSearchFirstName)).setText(tutor.getUsername());
-        ((TextView) view.findViewById(R.id.itemSearchLastName)).setText(tutor.getMail());
-        ((TextView) view.findViewById(R.id.itemSearchItemsTypes)).setText(tutor.getStringItems());
+        ((TextView) view.findViewById(R.id.itemSearchFirstName)).setText(tutor.getFirstName());
+        ((TextView) view.findViewById(R.id.itemSearchLastName)).setText(tutor.getLastName());
+        String[] items_array_string = view.getResources().getStringArray(R.array.items_array_rus);
+        List<ItemsTypes> itemsTypes = tutor.getItems();
+        ((TextView) view.findViewById(R.id.itemSearchItemsTypes)).setText(getStringItems(items_array_string, itemsTypes));
         ((TextView) view.findViewById(R.id.itemSearchSubscribtionType)).setText(tutor.getSubscriptionType().toString());
         ((TextView) view.findViewById(R.id.itemSearchRaiting)).setText(tutor.getStringRating());
         ((ImageView) view.findViewById(R.id.itemSearchAvatar)).setImageResource(R.drawable.anonim);
@@ -101,6 +108,19 @@ public class SearchTutorsAdapter extends BaseAdapter implements Filterable {
         return ((Tutor) getItem(position));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private String getStringItems(String[] items_array_string,
+                                        List<ItemsTypes> itemsTypes)
+    {
+        List<String> resArray = new ArrayList<>();
+        for(ItemsTypes item: itemsTypes)
+        {
+            resArray.add(items_array_string[item.ordinal()]);
+        }
+
+        return String.join(", ", resArray);
+    }
+
     @Override
     public Filter getFilter() {
         return this.itemFilter;
@@ -108,17 +128,23 @@ public class SearchTutorsAdapter extends BaseAdapter implements Filterable {
 
     private class ItemFilter extends Filter {
         protected FilterResults performFiltering(CharSequence constraint) {
+            int itemId = Integer.parseInt(constraint.toString());
             FilterResults result = new FilterResults();
-            if(constraint == ItemsTypes.ALL.toString()){
+            if(itemId == 0){
                 result.values = tutors;
                 result.count = tutors.size();
             }
             else{
                 ArrayList<Tutor> filteredList = new ArrayList<>();
                 for(Tutor tutor: tutors){
-                    if(tutor.getItems().contains(ItemsTypes.valueOf(constraint.toString().replace(' ', '_'))))
+                    List<ItemsTypes> items = tutor.getItems();
+                    for (ItemsTypes item: items)
                     {
-                        filteredList.add(tutor);
+                        if (item.ordinal() == itemId)
+                        {
+                            filteredList.add(tutor);
+                            break;
+                        }
                     }
                 }
                 result.values = filteredList;
