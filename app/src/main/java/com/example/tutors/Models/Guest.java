@@ -7,11 +7,11 @@ public class Guest extends AbstractUser{
         super();
     }
 
-    public Guest(String id, String username, String mail) {
-        super(id, username, mail, UserRole.GUEST, SubscriptionType.BASE);
+    public Guest(String id, String firstname, String lastname, String phoneNumber) {
+        super(id, firstname, lastname, UserRole.GUEST, SubscriptionType.BASE, phoneNumber);
     }
 
     public Guest(FirebaseUser user) {
-        super(user.getUid(), user.getDisplayName(), user.getEmail(), UserRole.GUEST, SubscriptionType.BASE);
+        super(user.getUid(), user.getDisplayName(), user.getEmail(), UserRole.GUEST, SubscriptionType.BASE, user.getPhoneNumber());
     }
 }
