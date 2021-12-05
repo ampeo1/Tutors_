@@ -21,9 +21,9 @@ public class Tutor extends AbstractUser {
 
     private float rating;
 
-    public Tutor(String firstName, String lastName, List<ItemsTypes> items, String phoneNumber, String description)
+    public Tutor(String id, String firstName, String lastName, List<ItemsTypes> items, String phoneNumber, String description)
     {
-        super(firstName, lastName, UserRole.TUTOR, SubscriptionType.BASE, phoneNumber);
+        super(id, firstName, lastName, UserRole.TUTOR, SubscriptionType.BASE, phoneNumber);
 
         this.description = description;
         this.items = items;

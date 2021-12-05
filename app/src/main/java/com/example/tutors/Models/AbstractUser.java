@@ -7,9 +7,9 @@ public abstract class AbstractUser implements Serializable {
 
     public String id;
 
-    public String username;
+    public String firstName;
 
-    public String mail;
+    public String lastName;
 
     public UserRole userRole;
 
@@ -22,8 +22,8 @@ public abstract class AbstractUser implements Serializable {
     public AbstractUser() {
     }
 
-    public AbstractUser(String firstName, String lastName, UserRole userRole, SubscriptionType subscriptionType, String phoneNumber) {
-        this.id = UUID.randomUUID().toString();
+    public AbstractUser(String id, String firstName, String lastName, UserRole userRole, SubscriptionType subscriptionType, String phoneNumber) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userRole = userRole;
@@ -36,12 +36,12 @@ public abstract class AbstractUser implements Serializable {
         return id;
     }
 
-    public String getUsername(){
-        return this.username;
+    public String getFirstName(){
+        return this.firstName;
     }
 
-    public String getMail(){
-        return this.mail;
+    public String getLastName(){
+        return this.lastName;
     }
 
     public String getImagePath() { return this.imagePath; }
