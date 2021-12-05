@@ -7,18 +7,22 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.example.tutors.Helpers.FirebaseHelper;
+import com.example.tutors.Models.Guest;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.FirebaseUserMetadata;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.Objects;
 
 public class SignInViewModel extends AndroidViewModel {
-    private static final String TAG = "Google Activity";
     private final ArrayList<AuthUI.IdpConfig> providers;
 
     public SignInViewModel(@NonNull Application application) {
@@ -31,22 +35,14 @@ public class SignInViewModel extends AndroidViewModel {
         return providers;
     }
 
-    public void setCurrentUser(Intent data){
-        String userId = this.getUserId(data);
-
+    public void setCurrentUser(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null && !isRegisteredUser(Objects.requireNonNull(user.getMetadata()))){
+            FirebaseHelper.addUser(new Guest(user));
+        }
     }
 
-    private String getUserId(Intent data){
-        String id = null;
-        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-        try {
-            id = task.getResult(ApiException.class).getId();
-            Log.d(TAG, id);
-        }
-        catch(ApiException e){
-            Log.w(TAG, "Sign in failed", e);
-        }
-
-        return id;
+    public boolean isRegisteredUser(FirebaseUserMetadata metadata){
+        return Math.abs(metadata.getCreationTimestamp() - metadata.getLastSignInTimestamp()) < 3;
     }
 }
