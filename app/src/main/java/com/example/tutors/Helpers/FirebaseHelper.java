@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.example.tutors.Models.AbstractUser;
 import com.example.tutors.Models.Tutor;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseUserMetadata;
 import com.google.firebase.database.DataSnapshot;
@@ -41,5 +42,9 @@ public class FirebaseHelper {
 
     public static Query getUserById(String userId) {
         return usersRef.orderByKey().equalTo(userId);
+    }
+
+    public static String getIdCurrentUser(){
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 }
