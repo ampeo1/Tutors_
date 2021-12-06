@@ -12,6 +12,7 @@
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
+        android:hint="Имя"
         app:layout_constraintStart_toEndOf="@+id/iwAvatarInEditPage"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,6 +21,7 @@
         android:layout_width="90dp"
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
+        android:hint="Фамилия"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toEndOf="@+id/etFirstNameInEditPage"
@@ -39,10 +41,10 @@
         android:id="@+id/etDescriptionInEditPage"
         android:layout_width="388dp"
         android:layout_height="132dp"
-        android:layout_marginBottom="172dp"
-        android:textSize="14sp"
         android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:hint="Описание"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.217"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +55,7 @@
         android:layout_width="220dp"
         android:layout_height="43dp"
         android:layout_marginTop="16dp"
+        android:hint="Предметы"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toEndOf="@+id/iwAvatarInEditPage"
@@ -73,9 +76,19 @@
         android:layout_width="211dp"
         android:layout_height="39dp"
         android:layout_marginTop="12dp"
+        android:hint="Номер телефона"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toEndOf="@+id/iwAvatarInEditPage"
         app:layout_constraintTop_toBottomOf="@+id/twItemsInEditPage" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

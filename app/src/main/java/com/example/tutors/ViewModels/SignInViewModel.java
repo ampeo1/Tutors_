@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUserMetadata;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Objects;
 
 public class SignInViewModel extends AndroidViewModel {
@@ -35,14 +36,17 @@ public class SignInViewModel extends AndroidViewModel {
         return providers;
     }
 
-    public void setCurrentUser(){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    public void setCurrentUser(FirebaseUser user){
         if (user != null && !isRegisteredUser(Objects.requireNonNull(user.getMetadata()))){
-            FirebaseHelper.addUser(new Guest(user));
+            FirebaseHelper.addUser(new  Guest(user));
         }
     }
 
     public boolean isRegisteredUser(FirebaseUserMetadata metadata){
-        return Math.abs(metadata.getCreationTimestamp() - metadata.getLastSignInTimestamp()) < 3;
+        int inaccuracy = 2;
+        Date create = new Date(metadata.getCreationTimestamp());
+        Date lastSignIn = new Date(metadata.getLastSignInTimestamp());
+        long result = Math.abs(metadata.getCreationTimestamp() - metadata.getLastSignInTimestamp());
+        return Math.abs(metadata.getCreationTimestamp() - metadata.getLastSignInTimestamp()) > inaccuracy;
     }
 }
