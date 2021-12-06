@@ -43,6 +43,7 @@ public class SignInViewModel extends AndroidViewModel {
     }
 
     public boolean isRegisteredUser(FirebaseUserMetadata metadata){
-        return Math.abs(metadata.getCreationTimestamp() - metadata.getLastSignInTimestamp()) < 3;
+        int inaccuracy = 2;
+        return Math.abs(metadata.getCreationTimestamp() - metadata.getLastSignInTimestamp()) > inaccuracy;
     }
 }
