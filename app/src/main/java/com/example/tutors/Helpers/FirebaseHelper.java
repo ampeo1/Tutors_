@@ -63,6 +63,7 @@ public class FirebaseHelper {
 
     public static Query getLessonByTutorId(String tutorId) {
         return lessonsRef.orderByChild(LESSON_TUTOR_ID_PROPERTY).equalTo(tutorId);
+    }
 
     public static String getIdCurrentUser(){
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
