@@ -17,9 +17,9 @@ public class Tutor extends AbstractUser {
 
     }
 
-    private String description;
+    public String description;
 
-    private float rating;
+    public float rating;
 
     public Tutor(String id, String firstName, String lastName, List<ItemsTypes> items, String phoneNumber, String description)
     {

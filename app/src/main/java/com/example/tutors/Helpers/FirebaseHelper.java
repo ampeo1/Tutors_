@@ -20,9 +20,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.UUID;
 
 public class FirebaseHelper {
+    private static final String EXCEPTION_TAG = "FirebaseHelperException";
     private static final String TYPE_PROPERTY_NAME = "type";
     private static final String LESSON_STUDENT_ID_PROPERTY = "studentId";
     private static final String LESSON_TUTOR_ID_PROPERTY = "tutorId";
@@ -66,5 +68,20 @@ public class FirebaseHelper {
 
     public static String getIdCurrentUser(){
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
+
+    public static Class<?> getUserClass(DataSnapshot snapshot){
+        Class<?> userClass = Object.class;
+        for (DataSnapshot property: snapshot.getChildren()) {
+            if(Objects.equals(property.getKey(), TYPE_PROPERTY_NAME)) {
+                try {
+                    userClass = Class.forName(Objects.requireNonNull(property.getValue(String.class)));
+                } catch (ClassNotFoundException e) {
+                    Log.e(EXCEPTION_TAG, e.getMessage());
+                }
+            }
+        }
+
+        return userClass;
     }
 }

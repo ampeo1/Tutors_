@@ -1,6 +1,9 @@
 package com.example.tutors.Models;
 
+import com.google.firebase.auth.FirebaseUser;
+
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.UUID;
 
 public abstract class AbstractUser implements Serializable {
@@ -32,6 +35,16 @@ public abstract class AbstractUser implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public AbstractUser(FirebaseUser user, UserRole userRole, SubscriptionType subscriptionType){
+        this.id = user.getUid();
+        String test = user.getEmail();
+        setFirstAndLastName(user.getDisplayName());
+        this.userRole = userRole;
+        this.subscriptionType = subscriptionType;
+        this.imagePath = "src/main/res/drawable/anonim.png";
+        this.phoneNumber = user.getPhoneNumber();
+    }
+
     public String getId(){
         return id;
     }
@@ -50,5 +63,18 @@ public abstract class AbstractUser implements Serializable {
 
     public String getPhoneNumber() {
         return this.phoneNumber;
+    }
+
+    private void setFirstAndLastName(String displayName){
+        String[] names = displayName.split(" ");
+        switch (names.length){
+            case 1:
+                this.firstName = names[0];
+                break;
+            case 2:
+                this.firstName = names[0];
+                this.lastName = names[1];
+                break;
+        }
     }
 }

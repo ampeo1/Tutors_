@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUserMetadata;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Objects;
 
 public class SignInViewModel extends AndroidViewModel {
@@ -35,10 +36,9 @@ public class SignInViewModel extends AndroidViewModel {
         return providers;
     }
 
-    public void setCurrentUser(){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    public void setCurrentUser(FirebaseUser user){
         if (user != null && !isRegisteredUser(Objects.requireNonNull(user.getMetadata()))){
-            FirebaseHelper.addUser(new Guest(user));
+            FirebaseHelper.addUser(new  Guest(user));
         }
     }
 

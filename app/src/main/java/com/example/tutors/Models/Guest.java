@@ -2,6 +2,8 @@ package com.example.tutors.Models;
 
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 public class Guest extends AbstractUser{
     public Guest(){
         super();
@@ -12,6 +14,6 @@ public class Guest extends AbstractUser{
     }
 
     public Guest(FirebaseUser user) {
-        super(user.getUid(), user.getDisplayName(), user.getEmail(), UserRole.GUEST, SubscriptionType.BASE, user.getPhoneNumber());
+        super(user, UserRole.GUEST, SubscriptionType.BASE);
     }
 }
