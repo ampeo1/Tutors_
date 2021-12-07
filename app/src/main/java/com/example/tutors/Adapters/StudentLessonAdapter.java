@@ -1,6 +1,7 @@
 package com.example.tutors.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.annotation.RequiresApi;
 
 import com.example.tutors.Models.ItemsTypes;
 import com.example.tutors.Models.Lesson;
+import com.example.tutors.Models.LessonStatus;
 import com.example.tutors.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,6 +43,7 @@ public class StudentLessonAdapter extends BaseAdapter {
         lessonsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                lessons.clear();
                 for (DataSnapshot lessonSnapshots: snapshot.getChildren()) {
                     lessons.add(lessonSnapshots.getValue(Lesson.class));
                 }
@@ -105,6 +108,14 @@ public class StudentLessonAdapter extends BaseAdapter {
         ((TextView) view.findViewById(R.id.twStudentLessonItem)).setText(getStringItem(items_array_string, itemType));
         SimpleDateFormat dateFormat = new SimpleDateFormat();
         ((TextView) view.findViewById(R.id.twStudentLessonDate)).setText(dateFormat.format(lesson.dateEvent));
+        if (lesson.lessonStatus == LessonStatus.CANCELED)
+        {
+            view.setBackgroundColor(Color.rgb(227, 89, 79));
+        }
+        else if (lesson.lessonStatus == LessonStatus.COMPLETED)
+        {
+            view.setBackgroundColor(Color.rgb(65, 180, 65));
+        }
         return view;
     }
 }
