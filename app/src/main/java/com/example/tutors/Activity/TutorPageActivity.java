@@ -1,24 +1,34 @@
 package com.example.tutors.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tutors.Helpers.FirebaseHelper;
 import com.example.tutors.Models.ItemsTypes;
+import com.example.tutors.Models.Student;
 import com.example.tutors.Models.Tutor;
 import com.example.tutors.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TutorPageActivity extends AppCompatActivity {
-
+    private Tutor tutor;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +42,8 @@ public class TutorPageActivity extends AppCompatActivity {
         TextView items = findViewById(R.id.twItemsInTutorPage);
         TextView description = findViewById(R.id.twDescriptionInTutorPage);
         ImageView avatar = findViewById(R.id.iwAvatarInTutorPage);
+        avatar.setImageResource(R.drawable.anonim);
 
-        Tutor tutor;
         Bundle arguments = getIntent().getExtras();
         if(arguments!=null){
             tutor = (Tutor) arguments.getSerializable(Tutor.class.getSimpleName());
@@ -44,8 +54,38 @@ public class TutorPageActivity extends AppCompatActivity {
             rating.setText(tutor.getStringRating());
             items.setText(getStringItems(tutor));
             description.setText(tutor.getDescription());
-            // avatar.setImageURI(URI.parse("file://mnt/sdcard/cat.jpg"));
+            if (tutor.getImagePath() != null){
+                Picasso.with(getApplicationContext())
+                        .load(tutor.getImagePath())
+                        .into(avatar);
+            }
         }
+
+        Button btn = findViewById(R.id.btnBookLeasson);
+
+        FirebaseHelper.getUserById(FirebaseHelper.getIdCurrentUser()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot user: snapshot.getChildren()) {
+                    if (FirebaseHelper.getUserClass(user) != Student.class) {
+                        btn.setVisibility(View.INVISIBLE);
+                    }
+                    else {
+                        btn.setVisibility(View.VISIBLE);
+                        btn.setOnClickListener(v -> {
+                            Intent intent = new Intent(getApplicationContext(), BookLeassonActivity.class);
+                            intent.putExtra(Tutor.class.getSimpleName(),  tutor);
+                            startActivity(intent);
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

@@ -7,7 +7,7 @@ apply plugin: 'com.google.gms.google-services'
 android {
     signingConfigs {
         debug {
-            storeFile file('C:\\Users\\nikita\\Documents\\GitHub\\Tutors_\\keystore\\keystore.jks')
+            storeFile file('C:\\University\\Tutors\\keystore\\keystore.jks')
             storePassword 'NikitaPidor'
             keyPassword 'NikitaPidor'
             keyAlias 'key0'
