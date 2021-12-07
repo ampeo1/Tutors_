@@ -1,48 +1,70 @@
 package com.example.tutors.Models;
 
+import android.net.Uri;
+
 import com.google.firebase.auth.FirebaseUser;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.UUID;
 
 public abstract class AbstractUser implements Serializable {
-
     public String id;
-
     public String firstName;
-
     public String lastName;
-
-    public UserRole userRole;
-
-    private SubscriptionType subscriptionType;
-
     public String imagePath;
-
     public String phoneNumber;
+    public String mail;
 
     public AbstractUser() {
     }
 
-    public AbstractUser(String id, String firstName, String lastName, UserRole userRole, SubscriptionType subscriptionType, String phoneNumber) {
+    public AbstractUser(String id, String firstName, String lastName, String phoneNumber, String mail, String imagePath) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userRole = userRole;
-        this.subscriptionType = subscriptionType;
-        this.imagePath = "src/main/res/drawable/anonim.png";
+        this.imagePath = imagePath;
         this.phoneNumber = phoneNumber;
+        this.mail = mail;
     }
 
-    public AbstractUser(FirebaseUser user, UserRole userRole, SubscriptionType subscriptionType){
+    public AbstractUser(FirebaseUser user){
         this.id = user.getUid();
-        String test = user.getEmail();
-        setFirstAndLastName(user.getDisplayName());
-        this.userRole = userRole;
-        this.subscriptionType = subscriptionType;
-        this.imagePath = "src/main/res/drawable/anonim.png";
+        setFirstAndLastName(Objects.requireNonNull(user.getDisplayName()));
+        this.imagePath = user.getPhotoUrl().toString();
         this.phoneNumber = user.getPhoneNumber();
+        this.mail = user.getEmail();
+    }
+
+    public void setFirstName(String firstName) {
+        if (checkString(firstName)) {
+            this.firstName = firstName;
+        }
+    }
+
+    public void setLastName(String lastName) {
+        if (checkString(lastName)) {
+            this.lastName = lastName;
+        }
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        if (checkString(phoneNumber)) {
+            this.phoneNumber = phoneNumber;
+        }
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        if (checkString(mail)) {
+            this.mail = mail;
+        }
     }
 
     public String getId(){
@@ -57,9 +79,9 @@ public abstract class AbstractUser implements Serializable {
         return this.lastName;
     }
 
-    public String getImagePath() { return this.imagePath; }
-
-    public SubscriptionType getSubscriptionType() { return this.subscriptionType; }
+    public String getImagePath() {
+        return imagePath;
+    }
 
     public String getPhoneNumber() {
         return this.phoneNumber;
@@ -76,5 +98,9 @@ public abstract class AbstractUser implements Serializable {
                 this.lastName = names[1];
                 break;
         }
+    }
+
+    private boolean checkString(String value) {
+        return value != null && !value.equals("");
     }
 }
