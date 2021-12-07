@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/twTutorLessonTopic"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/twTutorLessonItem"
+        app:layout_constraintTop_toBottomOf="@+id/etTutorLessonMark" />
+
+    <TextView
+        android:id="@+id/twTutorLessonItem"
+        android:layout_width="201dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerLessonStatus" />
+
+    <TextView
+        android:id="@+id/twTutorLessonDate"
+        android:layout_width="193dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="5dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.786"
+        app:layout_constraintStart_toEndOf="@+id/etTutorLessonMark"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etTutorLessonMark"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="16dp"
+        android:digits="0123456789"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/spinnerLessonStatus"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/btnSaveLessonChanges"
+        android:layout_width="143dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="5dp"
+        android:text="@string/btnSaveLessonChanges"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/twTutorLessonTopic"
+        app:layout_constraintTop_toBottomOf="@+id/twTutorLessonDate" />
+
+    <Spinner
+        android:id="@+id/spinnerLessonStatus"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

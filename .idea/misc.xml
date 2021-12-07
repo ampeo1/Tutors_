@@ -10,11 +10,15 @@
         <entry key="..\:/University/Tutors/app/src/main/res/layout/search_tutor_item.xml" value="0.3671875" />
         <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2175925925925926" />
         <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/drawable/items.xml" value="0.2462962962962963" />
-        <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout-land/activity_main.xml" value="0.3828571428571429" />
+        <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout-land/activity_main.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout-land/activity_profile_editor.xml" value="0.21957671957671956" />
         <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout-land/activity_search.xml" value="0.21957671957671956" />
-        <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout-land/activity_tutor_page.xml" value="0.21957671957671956" />
+        <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout-land/activity_student_lesson.xml" value="0.3828571428571429" />
+        <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout-land/activity_tutor_lesson.xml" value="0.21825396825396826" />
+        <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout-land/activity_tutor_page.xml" value="0.42857142857142855" />
         <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout-land/search_tutor_item.xml" value="0.42857142857142855" />
+        <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout-land/student_lesson_item.xml" value="0.42857142857142855" />
+        <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout-land/tutor_lesson_item.xml" value="0.5142857142857143" />
         <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout/activity_google_sign_in.xml" value="0.25885416666666666" />
         <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout/activity_lesson.xml" value="0.24479166666666666" />
         <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout/activity_main.xml" value="0.37907608695652173" />
@@ -22,7 +26,7 @@
         <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout/activity_search.xml" value="0.25885416666666666" />
         <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout/activity_student_lesson.xml" value="0.2604166666666667" />
         <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout/activity_tutor_lesson.xml" value="0.2604166666666667" />
-        <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout/activity_tutor_page.xml" value="0.2546875" />
+        <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout/activity_tutor_page.xml" value="0.42857142857142855" />
         <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout/item.xml" value="0.1" />
         <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout/lesson_item.xml" value="0.24479166666666666" />
         <entry key="..\:/Users/nikita/Documents/GitHub/Tutors_/app/src/main/res/layout/search_tutor_item.xml" value="0.42857142857142855" />

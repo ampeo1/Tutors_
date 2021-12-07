@@ -114,7 +114,7 @@ public class TutorLessonAdapter extends BaseAdapter {
         Spinner lessonStatusSpinner = view.findViewById(R.id.spinnerLessonStatus);
         ArrayAdapter<CharSequence> lessonStatusAdapter = ArrayAdapter.createFromResource(view.getContext(),
                 R.array.lesson_status_array_rus, android.R.layout.simple_spinner_item);
-        int a = lesson.lessonStatus.ordinal();
+
         lessonStatusSpinner.setAdapter(lessonStatusAdapter);
         lessonStatusSpinner.setSelection(lesson.lessonStatus.ordinal());
 

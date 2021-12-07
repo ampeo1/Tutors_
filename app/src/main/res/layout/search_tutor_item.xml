@@ -25,7 +25,7 @@
         android:layout_marginTop="16dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.728"
+        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toEndOf="@+id/itemSearchFirstName"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />

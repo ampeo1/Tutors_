@@ -7,34 +7,36 @@
     tools:context=".Activity.MainActivity">
 
     <Button
+        android:id="@+id/btnEditProfile"
+        android:layout_width="600px"
+        android:layout_height="50dp"
+        android:layout_marginTop="232dp"
+        android:text="@string/btnEditProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/btnSearch"
         android:layout_width="600px"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="92dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
         android:text="@string/btnSearchValue"
         app:layout_constraintBottom_toTopOf="@+id/btnToLessonsPage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnEditProfile"
-        android:layout_width="600px"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="84dp"
-        android:text="Edit profile"
-        app:layout_constraintBottom_toTopOf="@+id/btnSearch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEditProfile"
+        app:layout_constraintVertical_bias="0.577" />
 
     <Button
         android:id="@+id/btnToLessonsPage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="180dp"
+        android:layout_width="600px"
+        android:layout_height="50dp"
+        android:layout_marginBottom="252dp"
         android:text="@string/btnToLessonPage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
