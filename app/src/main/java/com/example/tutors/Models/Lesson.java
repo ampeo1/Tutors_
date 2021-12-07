@@ -10,28 +10,32 @@ public class Lesson {
     public Date dateEvent;
     public ItemsTypes type;
     public int mark;
+    public LessonStatus lessonStatus;
 
     public Lesson(){
 
     }
 
-    public Lesson(String id, String topic, String tutorId, String studentId, Date dateEvent, ItemsTypes type, int mark) {
+    public Lesson(String id, int mark, LessonStatus lessonStatus, Lesson oldLesson) {
         this.id = id;
-        this.topic = topic;
-        this.tutorId = tutorId;
-        this.studentId = studentId;
-        this.dateEvent = dateEvent;
-        this.type = type;
         this.mark = mark;
+        this.lessonStatus = lessonStatus;
+
+        this.topic = oldLesson.topic;
+        this.tutorId = oldLesson.tutorId;
+        this.studentId = oldLesson.studentId;
+        this.dateEvent = oldLesson.dateEvent;
+        this.type = oldLesson.type;
     }
 
-    public Lesson(String topic, String tutorId, String studentId, Date dateEvent, ItemsTypes type, int mark) {
+    public Lesson(String topic, String tutorId, String studentId, Date dateEvent, ItemsTypes type) {
         this.topic = topic;
         this.tutorId = tutorId;
         this.studentId = studentId;
         this.dateEvent = dateEvent;
         this.type = type;
-        this.mark = mark;
+        this.mark = -1;
+        this.lessonStatus = LessonStatus.PLANNED;
     }
 
     public String getId() {
