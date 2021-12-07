@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -99,7 +100,15 @@ public class SearchTutorsAdapter extends BaseAdapter implements Filterable {
         List<ItemsTypes> itemsTypes = tutor.getItems();
         ((TextView) view.findViewById(R.id.itemSearchItemsTypes)).setText(getStringItems(items_array_string, itemsTypes));
         ((TextView) view.findViewById(R.id.itemSearchRaiting)).setText(tutor.getStringRating());
-        ((ImageView) view.findViewById(R.id.itemSearchAvatar)).setImageResource(R.drawable.anonim);
+        ImageView imageView = (ImageView) view.findViewById(R.id.itemSearchAvatar);
+        if(tutor.getImagePath() == null){
+            imageView.setImageResource(R.drawable.anonim);
+        }
+        else {
+            Picasso.with(view.getContext())
+                    .load(tutor.getImagePath())
+                    .into(imageView);
+        }
         return view;
     }
 
