@@ -1,6 +1,7 @@
 package com.example.tutors.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.text.Editable;
 import android.view.LayoutInflater;
@@ -119,6 +120,15 @@ public class TutorLessonAdapter extends BaseAdapter {
         lessonStatusSpinner.setSelection(lesson.lessonStatus.ordinal());
 
         Button btnSaveLessonChanges = view.findViewById(R.id.btnSaveLessonChanges);
+        if (lesson.lessonStatus == LessonStatus.CANCELED)
+        {
+            view.setBackgroundColor(Color.rgb(227, 89, 79));
+        }
+        else if (lesson.lessonStatus == LessonStatus.COMPLETED)
+        {
+            view.setBackgroundColor(Color.rgb(120, 180, 65));
+        }
+
         btnSaveLessonChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

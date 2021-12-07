@@ -32,18 +32,28 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity {
 
     private AbstractUser currentUser;
+    private Intent intentToLesson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-/*        Lesson lesson = new Lesson( "H20", UUID.randomUUID().toString(), UUID.randomUUID().toString(), new Date(), ItemsTypes.CHEMISTRY);
-        FirebaseHelper.addLesson(lesson);*/
-/*        String currentUserId = FirebaseHelper.getIdCurrentUser();
+        String currentUserId = FirebaseHelper.getIdCurrentUser();
         FirebaseHelper.getUserById(currentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot userSnapshots: snapshot.getChildren()) {
+                    Class<?> a = FirebaseHelper.getUserClass(userSnapshots);
+                    if (a.toString().equals(Student.class.toString()))
+                    {
+                        currentUser = userSnapshots.getValue(Student.class);
+                        intentToLesson = new Intent(getApplicationContext(), StudentLessonActivity.class);
+                    }
+                    else if (a.toString().equals(Tutor.class.toString()))
+                    {
+                        currentUser = userSnapshots.getValue(Tutor.class);
+                        intentToLesson = new Intent(getApplicationContext(), TutorLessonActivity.class);
+                    }
                 }
             }
 
@@ -51,14 +61,17 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 currentUser = null;
             }
-        });*/
+        });
         setupButtons();
     }
 
     private void setupButtons(){
         setupButtonWithActivity(R.id.btnSearch, SearchActivity.class);
         setupButtonWithActivity(R.id.btnEditProfile, ProfileEditorActivity.class);
-        setupButtonWithActivity(R.id.btnToLessonsPage, TutorLessonActivity.class);
+        Button btn = findViewById(R.id.btnToLessonsPage);
+        btn.setOnClickListener(v -> {
+            startActivity(intentToLesson);
+        });
     }
 
     private void setupButtonWithActivity(int buttonId, Class<?> cls){
