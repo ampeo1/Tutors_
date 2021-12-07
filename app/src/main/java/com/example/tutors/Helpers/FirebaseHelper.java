@@ -1,5 +1,7 @@
 package com.example.tutors.Helpers;
 
+import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -8,15 +10,22 @@ import androidx.annotation.NonNull;
 import com.example.tutors.Models.AbstractUser;
 import com.example.tutors.Models.Lesson;
 import com.example.tutors.Models.Tutor;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseUserMetadata;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -84,5 +93,29 @@ public class FirebaseHelper {
         }
 
         return userClass;
+    }
+
+    public static void SaveAvatar(Uri uri, AbstractUser user, Context context){
+        if (uri == null){
+            return;
+        }
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        final StorageReference riversRef = storageRef.child("avatars/" + uri.getLastPathSegment());
+        UploadTask uploadTask = riversRef.putFile(uri);
+
+        uploadTask.continueWithTask(task -> {
+            if(!task.isSuccessful()){
+                throw task.getException();
+            }
+
+            return riversRef.getDownloadUrl();
+        }).addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                final Uri downloadUri = task.getResult();
+                user.setImagePath(downloadUri.toString());
+                Toast.makeText( context, "Изображение успешно загружено", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

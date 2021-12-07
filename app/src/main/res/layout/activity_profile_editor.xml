@@ -9,23 +9,27 @@
     <EditText
         android:id="@+id/etFirstNameInEditPage"
         android:layout_width="90dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
-        android:hint="Имя"
+        android:hint="@string/firstname"
+        android:inputType="textShortMessage"
         app:layout_constraintStart_toEndOf="@+id/iwAvatarInEditPage"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/etLastNameInEditPage"
         android:layout_width="90dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginTop="20dp"
-        android:hint="Фамилия"
+        android:hint="@string/Lastname"
+        android:inputType="textShortMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toEndOf="@+id/etFirstNameInEditPage"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAutofill="no" />
 
     <ImageView
         android:id="@+id/iwAvatarInEditPage"
@@ -33,6 +37,7 @@
         android:layout_height="163dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="20dp"
+        android:contentDescription="@string/avatar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/anonim" />
@@ -42,53 +47,56 @@
         android:layout_width="388dp"
         android:layout_height="132dp"
         android:gravity="center_horizontal"
-        android:hint="Описание"
+        android:hint="@string/DescriptionProfile"
+        android:importantForAutofill="no"
+        android:inputType="textLongMessage"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/saveButtonEditPage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.217"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/twRatingInEditPage" />
-
-    <TextView
-        android:id="@+id/twItemsInEditPage"
-        android:layout_width="220dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="16dp"
-        android:hint="Предметы"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toEndOf="@+id/iwAvatarInEditPage"
-        app:layout_constraintTop_toBottomOf="@+id/etFirstNameInEditPage" />
-
-    <TextView
-        android:id="@+id/twRatingInEditPage"
-        android:layout_width="69dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.143"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iwAvatarInEditPage" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/etPhoneNumberInEditPage"
-        android:layout_width="211dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="12dp"
-        android:hint="Номер телефона"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:hint="@string/phoneNumber"
+        android:importantForAutofill="no"
+        android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toEndOf="@+id/iwAvatarInEditPage"
-        app:layout_constraintTop_toBottomOf="@+id/twItemsInEditPage" />
+        app:layout_constraintTop_toBottomOf="@+id/etLastNameInEditPage" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/saveButtonEditPage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="@string/SaveProfile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnChangeAvatar"
+        android:layout_width="158dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
+        android:text="Изменить "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iwAvatarInEditPage" />
+
+    <Spinner
+        android:id="@+id/typeUserSpinner"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iwAvatarInEditPage"
+        app:layout_constraintTop_toBottomOf="@+id/etPhoneNumberInEditPage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

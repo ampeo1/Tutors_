@@ -1,6 +1,18 @@
 <resources>
     <string name="app_name">Tutors</string>
     <string name="btnSearchValue">Поиск репетитора</string>
+    <string name="Lastname">Фамилия</string>
+    <string name="Subjects">Предметы</string>
+    <string name="DescriptionProfile">Описание</string>
+    <string name="phoneNumber">Номер телефона</string>
+    <string name="SaveProfile">Сохранить</string>
+    <string name="firstname">Имя</string>
+    <string name="avatar">Avatar</string>
     <string name="btnToLessonPage">Мои Уроки</string>
     <string name="btnSaveLessonChanges">Сохранить</string>
+    <string-array name="typesUsers">
+        <item>Репетитор</item>
+        <item>Студент</item>
+        <item>Без роли</item>
+    </string-array>
 </resources>
