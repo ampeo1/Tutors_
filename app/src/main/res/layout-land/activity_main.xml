@@ -7,36 +7,36 @@
     tools:context=".Activity.MainActivity">
 
     <Button
-        android:id="@+id/btnSearch"
-        android:layout_width="600px"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:text="@string/btnSearchValue"
-        app:layout_constraintBottom_toTopOf="@+id/btnToLessonsPage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/btnEditProfile"
         android:layout_width="600px"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
-        android:text="Edit  profile"
-        app:layout_constraintBottom_toTopOf="@+id/btnSearch"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/btnEditProfile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnToLessonsPage"
-        android:layout_width="225dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="120dp"
+        android:layout_width="600px"
+        android:layout_height="50dp"
+        android:layout_marginBottom="56dp"
         android:text="@string/btnToLessonPage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="600px"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/btnSearchValue"
+        app:layout_constraintBottom_toTopOf="@+id/btnToLessonsPage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEditProfile" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

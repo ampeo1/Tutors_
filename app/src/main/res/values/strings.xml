@@ -3,4 +3,5 @@
     <string name="btnSearchValue">Поиск репетитора</string>
     <string name="btnToLessonPage">Мои Уроки</string>
     <string name="btnSaveLessonChanges">Сохранить</string>
+    <string name="btnEditProfile">Настройки профиля</string>
 </resources>
