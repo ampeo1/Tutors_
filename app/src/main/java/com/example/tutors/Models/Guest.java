@@ -9,11 +9,11 @@ public class Guest extends AbstractUser{
         super();
     }
 
-    public Guest(String id, String firstname, String lastname, String phoneNumber) {
-        super(id, firstname, lastname, UserRole.GUEST, SubscriptionType.BASE, phoneNumber);
+    public Guest(String id, String firstname, String lastname, String phoneNumber, String mail) {
+        super(id, firstname, lastname, phoneNumber, mail);
     }
 
     public Guest(FirebaseUser user) {
-        super(user, UserRole.GUEST, SubscriptionType.BASE);
+        super(user);
     }
 }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,6 +46,13 @@ public class ProfileEditorActivity extends AppCompatActivity {
         });
     }
 
+    private void setupGuestActivity(Guest guest){
+        setupBaseUserActivity(guest);
+        hideView(R.id.etDescriptionInEditPage);
+        hideView(R.id.twItemsInEditPage);
+        hideView(R.id.twRatingInEditPage);
+    }
+
     private void setupTutorActivity(Tutor tutor){
         setupBaseUserActivity(tutor);
     }
@@ -52,6 +60,9 @@ public class ProfileEditorActivity extends AppCompatActivity {
     private void setupActivity(Object user) {
         if (user instanceof Tutor) {
             setupTutorActivity((Tutor)user);
+        }
+        if (user instanceof Guest) {
+            setupGuestActivity((Guest)user);
         }
 
     }
@@ -64,5 +75,9 @@ public class ProfileEditorActivity extends AppCompatActivity {
 
     private void setTextView(int idEditText, String value) {
         ((TextView)findViewById(idEditText)).setText(value);
+    }
+
+    private void hideView(int idView) {
+        findViewById(idView).setVisibility(View.GONE);
     }
 }

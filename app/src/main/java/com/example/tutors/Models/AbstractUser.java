@@ -7,42 +7,31 @@ import java.util.Objects;
 import java.util.UUID;
 
 public abstract class AbstractUser implements Serializable {
-
     public String id;
-
     public String firstName;
-
     public String lastName;
-
-    public UserRole userRole;
-
-    private SubscriptionType subscriptionType;
-
     public String imagePath;
-
     public String phoneNumber;
+    public String mail;
 
     public AbstractUser() {
     }
 
-    public AbstractUser(String id, String firstName, String lastName, UserRole userRole, SubscriptionType subscriptionType, String phoneNumber) {
+    public AbstractUser(String id, String firstName, String lastName, String phoneNumber, String mail) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userRole = userRole;
-        this.subscriptionType = subscriptionType;
         this.imagePath = "src/main/res/drawable/anonim.png";
         this.phoneNumber = phoneNumber;
+        this.mail = mail;
     }
 
-    public AbstractUser(FirebaseUser user, UserRole userRole, SubscriptionType subscriptionType){
+    public AbstractUser(FirebaseUser user){
         this.id = user.getUid();
-        String test = user.getEmail();
-        setFirstAndLastName(user.getDisplayName());
-        this.userRole = userRole;
-        this.subscriptionType = subscriptionType;
+        setFirstAndLastName(Objects.requireNonNull(user.getDisplayName()));
         this.imagePath = "src/main/res/drawable/anonim.png";
         this.phoneNumber = user.getPhoneNumber();
+        this.mail = user.getEmail();
     }
 
     public String getId(){
@@ -58,8 +47,6 @@ public abstract class AbstractUser implements Serializable {
     }
 
     public String getImagePath() { return this.imagePath; }
-
-    public SubscriptionType getSubscriptionType() { return this.subscriptionType; }
 
     public String getPhoneNumber() {
         return this.phoneNumber;

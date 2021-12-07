@@ -98,7 +98,6 @@ public class SearchTutorsAdapter extends BaseAdapter implements Filterable {
         String[] items_array_string = view.getResources().getStringArray(R.array.items_array_rus);
         List<ItemsTypes> itemsTypes = tutor.getItems();
         ((TextView) view.findViewById(R.id.itemSearchItemsTypes)).setText(getStringItems(items_array_string, itemsTypes));
-        ((TextView) view.findViewById(R.id.itemSearchSubscribtionType)).setText(tutor.getSubscriptionType().toString());
         ((TextView) view.findViewById(R.id.itemSearchRaiting)).setText(tutor.getStringRating());
         ((ImageView) view.findViewById(R.id.itemSearchAvatar)).setImageResource(R.drawable.anonim);
         return view;
