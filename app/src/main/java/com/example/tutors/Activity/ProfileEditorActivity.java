@@ -34,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ProfileEditorActivity extends AppCompatActivity {
     static final int GALLERY_REQUEST = 1;
@@ -164,7 +165,7 @@ public class ProfileEditorActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 AbstractUser oldUser = viewModel.getUser();
                 if (position == 0) {
-                    viewModel.setUser(new Tutor(oldUser.getId(), oldUser.getFirstName(), oldUser.getLastName(), new ArrayList<ItemsTypes>(), oldUser.getPhoneNumber(), "", oldUser.getMail(), oldUser.getImagePath()));
+                    viewModel.setUser(new Tutor(oldUser.getId(), oldUser.getFirstName(), oldUser.getLastName(), Arrays.asList(ItemsTypes.MATHS), oldUser.getPhoneNumber(), "", oldUser.getMail(), oldUser.getImagePath()));
                 }
                 if (position == 1){
                     viewModel.setUser(new Student(oldUser.getId(), oldUser.getFirstName(), oldUser.getLastName(), oldUser.getPhoneNumber(), oldUser.getMail(), oldUser.getImagePath()));
