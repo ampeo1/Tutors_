@@ -10,4 +10,9 @@
     <string name="avatar">Avatar</string>
     <string name="btnToLessonPage">Мои Уроки</string>
     <string name="btnSaveLessonChanges">Сохранить</string>
+    <string-array name="typesUsers">
+        <item>Репетитор</item>
+        <item>Студент</item>
+        <item>Без роли</item>
+    </string-array>
 </resources>

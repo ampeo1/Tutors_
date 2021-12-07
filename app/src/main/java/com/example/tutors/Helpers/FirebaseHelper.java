@@ -1,5 +1,6 @@
 package com.example.tutors.Helpers;
 
+import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
@@ -94,7 +95,7 @@ public class FirebaseHelper {
         return userClass;
     }
 
-    public static void SaveAvatar(Uri uri, AbstractUser user){
+    public static void SaveAvatar(Uri uri, AbstractUser user, Context context){
         if (uri == null){
             return;
         }
@@ -113,6 +114,7 @@ public class FirebaseHelper {
             if (task.isSuccessful()){
                 final Uri downloadUri = task.getResult();
                 user.setImagePath(downloadUri.toString());
+                Toast.makeText( context, "Изображение успешно загружено", Toast.LENGTH_LONG).show();
             }
         });
     }

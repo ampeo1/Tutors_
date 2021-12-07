@@ -7,8 +7,8 @@ public class Student extends AbstractUser{
         super();
     }
 
-    public Student(String id, String firstname, String lastname, String phoneNumber, String mail) {
-        super(id, firstname, lastname, phoneNumber, mail);
+    public Student(String id, String firstname, String lastname, String phoneNumber, String mail, String imagePath) {
+        super(id, firstname, lastname, phoneNumber, mail, imagePath);
     }
 
     public Student(FirebaseUser user) {

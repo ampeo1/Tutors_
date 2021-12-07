@@ -48,47 +48,26 @@
         android:layout_height="132dp"
         android:gravity="center_horizontal"
         android:hint="@string/DescriptionProfile"
+        android:importantForAutofill="no"
         android:inputType="textLongMessage"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/saveButtonEditPage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.217"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/twRatingInEditPage"
-        android:importantForAutofill="no" />
-
-    <TextView
-        android:id="@+id/twItemsInEditPage"
-        android:layout_width="220dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="16dp"
-        android:hint="@string/Subjects"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toEndOf="@+id/iwAvatarInEditPage"
-        app:layout_constraintTop_toBottomOf="@+id/etFirstNameInEditPage" />
-
-    <TextView
-        android:id="@+id/twRatingInEditPage"
-        android:layout_width="69dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnChangeAvatar"
-        app:layout_constraintTop_toBottomOf="@+id/etPhoneNumberInEditPage" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/etPhoneNumberInEditPage"
-        android:layout_width="211dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:hint="@string/phoneNumber"
+        android:importantForAutofill="no"
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toEndOf="@+id/iwAvatarInEditPage"
-        app:layout_constraintTop_toBottomOf="@+id/twItemsInEditPage"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/etLastNameInEditPage" />
 
     <Button
         android:id="@+id/saveButtonEditPage"
@@ -108,5 +87,16 @@
         android:text="Изменить "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iwAvatarInEditPage" />
+
+    <Spinner
+        android:id="@+id/typeUserSpinner"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iwAvatarInEditPage"
+        app:layout_constraintTop_toBottomOf="@+id/etPhoneNumberInEditPage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

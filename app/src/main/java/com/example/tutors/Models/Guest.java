@@ -9,8 +9,8 @@ public class Guest extends AbstractUser{
         super();
     }
 
-    public Guest(String id, String firstname, String lastname, String phoneNumber, String mail) {
-        super(id, firstname, lastname, phoneNumber, mail);
+    public Guest(String id, String firstname, String lastname, String phoneNumber, String mail, String imagePath) {
+        super(id, firstname, lastname, phoneNumber, mail, imagePath);
     }
 
     public Guest(FirebaseUser user) {

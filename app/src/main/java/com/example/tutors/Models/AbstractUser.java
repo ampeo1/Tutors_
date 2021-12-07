@@ -18,11 +18,11 @@ public abstract class AbstractUser implements Serializable {
     public AbstractUser() {
     }
 
-    public AbstractUser(String id, String firstName, String lastName, String phoneNumber, String mail) {
+    public AbstractUser(String id, String firstName, String lastName, String phoneNumber, String mail, String imagePath) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.imagePath = "src/main/res/drawable/anonim.png";
+        this.imagePath = imagePath;
         this.phoneNumber = phoneNumber;
         this.mail = mail;
     }
