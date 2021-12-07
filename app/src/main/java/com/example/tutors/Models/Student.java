@@ -7,11 +7,11 @@ public class Student extends AbstractUser{
         super();
     }
 
-    public Student(String id, String firstname, String lastname, String phoneNumber) {
-        super(id, firstname, lastname, UserRole.GUEST, SubscriptionType.BASE, phoneNumber);
+    public Student(String id, String firstname, String lastname, String phoneNumber, String mail) {
+        super(id, firstname, lastname, phoneNumber, mail);
     }
 
     public Student(FirebaseUser user) {
-        super(user.getUid(), user.getDisplayName(), user.getEmail(), UserRole.GUEST, SubscriptionType.BASE, user.getPhoneNumber());
+        super(user);
     }
 }

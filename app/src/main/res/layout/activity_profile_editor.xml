@@ -50,7 +50,7 @@
         android:hint="@string/DescriptionProfile"
         android:inputType="textLongMessage"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/saveButtonEditPage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.217"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,11 +72,10 @@
         android:id="@+id/twRatingInEditPage"
         android:layout_width="69dp"
         android:layout_height="35dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.143"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iwAvatarInEditPage" />
+        app:layout_constraintStart_toEndOf="@+id/btnChangeAvatar"
+        app:layout_constraintTop_toBottomOf="@+id/etPhoneNumberInEditPage" />
 
     <EditText
         android:id="@+id/etPhoneNumberInEditPage"
@@ -92,12 +91,22 @@
         android:importantForAutofill="no" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/saveButtonEditPage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/SaveProfile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnChangeAvatar"
+        android:layout_width="158dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
+        android:text="Изменить "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iwAvatarInEditPage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
