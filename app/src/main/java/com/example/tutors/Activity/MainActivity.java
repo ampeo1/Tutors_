@@ -37,16 +37,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String currentUserId = FirebaseHelper.getIdCurrentUser();
+/*        Lesson lesson = new Lesson( "H20", UUID.randomUUID().toString(), UUID.randomUUID().toString(), new Date(), ItemsTypes.CHEMISTRY);
+        FirebaseHelper.addLesson(lesson);*/
+/*        String currentUserId = FirebaseHelper.getIdCurrentUser();
         FirebaseHelper.getUserById(currentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot userSnapshots: snapshot.getChildren()) {
-                    Class<?> _class = FirebaseHelper.getUserClass(userSnapshots);
-                    if (_class instanceof Student)
-                    {
-
-                    }
                 }
             }
 
@@ -54,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 currentUser = null;
             }
-        });
+        });*/
         setupButtons();
     }
 
