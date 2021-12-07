@@ -13,6 +13,8 @@ import com.example.tutors.Activity.SearchActivity;
 import com.example.tutors.Helpers.FirebaseHelper;
 import com.example.tutors.Models.AbstractUser;
 import com.example.tutors.Models.ItemsTypes;
+import com.example.tutors.Models.Lesson;
+import com.example.tutors.Models.LessonStatus;
 import com.example.tutors.Models.Student;
 import com.example.tutors.Models.Tutor;
 import com.example.tutors.R;
@@ -24,6 +26,8 @@ import com.google.gson.Gson;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+/*        Lesson lesson = new Lesson( "H20", UUID.randomUUID().toString(), UUID.randomUUID().toString(), new Date(), ItemsTypes.CHEMISTRY);
+        FirebaseHelper.addLesson(lesson);*/
 /*        String currentUserId = FirebaseHelper.getIdCurrentUser();
         FirebaseHelper.getUserById(currentUserId).addValueEventListener(new ValueEventListener() {
             @Override

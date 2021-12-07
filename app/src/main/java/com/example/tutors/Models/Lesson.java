@@ -16,15 +16,16 @@ public class Lesson {
 
     }
 
-    public Lesson(String id, String topic, String tutorId, String studentId, Date dateEvent, ItemsTypes type, int mark, LessonStatus lessonStatus) {
+    public Lesson(String id, int mark, LessonStatus lessonStatus, Lesson oldLesson) {
         this.id = id;
-        this.topic = topic;
-        this.tutorId = tutorId;
-        this.studentId = studentId;
-        this.dateEvent = dateEvent;
-        this.type = type;
         this.mark = mark;
         this.lessonStatus = lessonStatus;
+
+        this.topic = oldLesson.topic;
+        this.tutorId = oldLesson.tutorId;
+        this.studentId = oldLesson.studentId;
+        this.dateEvent = oldLesson.dateEvent;
+        this.type = oldLesson.type;
     }
 
     public Lesson(String topic, String tutorId, String studentId, Date dateEvent, ItemsTypes type) {

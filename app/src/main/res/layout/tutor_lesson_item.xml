@@ -29,9 +29,12 @@
         android:id="@+id/twTutorLessonDate"
         android:layout_width="203dp"
         android:layout_height="50dp"
+        android:layout_marginTop="20dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="82dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/twTutorLessonItem" />
 
     <EditText
         android:id="@+id/etTutorLessonMark"
@@ -39,17 +42,18 @@
         android:layout_height="56dp"
         android:layout_marginStart="56dp"
         android:layout_marginTop="24dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.384"
         app:layout_constraintStart_toEndOf="@+id/twTutorLessonTopic"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:digits="0123456789"
+        android:inputType="number"/>
 
     <Button
-        android:id="@+id/btnSaveLessonСhanges"
+        android:id="@+id/btnSaveLessonChanges"
         android:layout_width="160dp"
         android:layout_height="64dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="56dp"
         android:text="@string/btnSaveLessonChanges"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/spinnerLessonStatus"
@@ -60,9 +64,9 @@
         android:layout_width="203dp"
         android:layout_height="61dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/twTutorLessonItem"
+        app:layout_constraintTop_toBottomOf="@+id/twTutorLessonDate"
         tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,11 +2,13 @@ package com.example.tutors.Adapters;
 
 import android.content.Context;
 import android.os.Build;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -15,8 +17,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.example.tutors.Helpers.FirebaseHelper;
 import com.example.tutors.Models.ItemsTypes;
 import com.example.tutors.Models.Lesson;
+import com.example.tutors.Models.LessonStatus;
 import com.example.tutors.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,14 +36,15 @@ public class TutorLessonAdapter extends BaseAdapter {
     private ArrayList<Lesson> lessons;
 
     public TutorLessonAdapter(Context context, Query lessonsRef) {
+        lessons = new ArrayList<>();
         ctx = context;
-        this.lessons = new ArrayList<>();
         lInflater = (LayoutInflater) ctx
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         lessonsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                lessons.clear();
                 for (DataSnapshot lessonSnapshots: snapshot.getChildren()) {
                     lessons.add(lessonSnapshots.getValue(Lesson.class));
                 }
@@ -91,13 +96,14 @@ public class TutorLessonAdapter extends BaseAdapter {
 
         Lesson lesson = getLesson(position);
         ((TextView) view.findViewById(R.id.twTutorLessonTopic)).setText(lesson.topic);
+        EditText markET = view.findViewById(R.id.etTutorLessonMark);
         if (lesson.mark != -1)
         {
-            ((EditText) view.findViewById(R.id.etTutorLessonMark)).setText(Integer.toString(lesson.mark));
+            markET.setText(Integer.toString(lesson.mark));
         }
         else
         {
-            ((EditText) view.findViewById(R.id.etTutorLessonMark)).setText("");
+            markET.setText("");
         }
         String[] items_array_string = view.getResources().getStringArray(R.array.items_array_rus);
         ItemsTypes itemType = lesson.type;
@@ -105,10 +111,39 @@ public class TutorLessonAdapter extends BaseAdapter {
         SimpleDateFormat dateFormat = new SimpleDateFormat();
         ((TextView) view.findViewById(R.id.twTutorLessonDate)).setText(dateFormat.format(lesson.dateEvent));
 
-        Spinner filterSpinner = view.findViewById(R.id.spinnerLessonStatus);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
+        Spinner lessonStatusSpinner = view.findViewById(R.id.spinnerLessonStatus);
+        ArrayAdapter<CharSequence> lessonStatusAdapter = ArrayAdapter.createFromResource(view.getContext(),
                 R.array.lesson_status_array_rus, android.R.layout.simple_spinner_item);
-        filterSpinner.setAdapter(adapter);
+        int a = lesson.lessonStatus.ordinal();
+        lessonStatusSpinner.setAdapter(lessonStatusAdapter);
+        lessonStatusSpinner.setSelection(lesson.lessonStatus.ordinal());
+
+        Button btnSaveLessonChanges = view.findViewById(R.id.btnSaveLessonChanges);
+        btnSaveLessonChanges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LessonStatus selectedLessonStatus = LessonStatus.values()[(int) lessonStatusSpinner.getSelectedItemId()];
+                String markString = markET.getText().toString();
+                int newMark;
+                if (markString.equals(""))
+                {
+                    newMark = -1;
+                }
+                else
+                {
+                    newMark = Integer.parseInt(markString);
+                }
+                if (newMark > 10 | newMark < 0 && newMark != - 1)
+                {
+                    Toast.makeText(v.getContext(), "Оценка может быть от 0 до 10", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Lesson lessonChanges = new Lesson(lesson.getId(), newMark, selectedLessonStatus, lesson);
+                    FirebaseHelper.addLesson(lessonChanges);
+                }
+            }
+        });
         return view;
     }
 }
