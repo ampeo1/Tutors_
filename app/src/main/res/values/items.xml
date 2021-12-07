@@ -7,4 +7,9 @@
         <item>Химия</item>
         <item>Русский язык</item>
     </string-array>
+    <string-array name="lesson_status_array_rus">
+        <item>Планируется</item>
+        <item>Завершен</item>
+        <item>Отменен</item>
+    </string-array>
 </resources>
