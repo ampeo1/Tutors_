@@ -2,6 +2,7 @@ package com.example.tutors.Models;
 
 import com.example.tutors.R;
 import com.firebase.ui.auth.data.model.PhoneNumber;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
@@ -32,7 +33,16 @@ public class Tutor extends AbstractUser {
         this.description = description;
         this.items = items;
         this.rating = 0.0f;
-        this.students = new ArrayList<>();
+        this.students = new ArrayList<TutorsStudent>();
+        this.items = items;
+    }
+
+    public Tutor(FirebaseUser user){
+        super(user);
+
+        this.students = new ArrayList<TutorsStudent>();
+        this.items = new ArrayList<ItemsTypes>();
+
     }
 
     public List<ItemsTypes> getItems()

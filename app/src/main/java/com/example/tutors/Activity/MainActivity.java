@@ -19,6 +19,12 @@ import com.example.tutors.Models.Student;
 import com.example.tutors.Models.Tutor;
 import com.example.tutors.Models.TutorsStudent;
 import com.example.tutors.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -46,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot userSnapshots: snapshot.getChildren()) {
+
                     Class<?> a = FirebaseHelper.getUserClass(userSnapshots);
                     if (a.toString().equals(Student.class.toString()))
                     {
@@ -64,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 currentUser = null;
             }
-
         });
         setupButtons();
     }
@@ -75,6 +81,25 @@ public class MainActivity extends AppCompatActivity {
         Button btn = findViewById(R.id.btnToLessonsPage);
         btn.setOnClickListener(v -> {
             startActivity(intentToLesson);
+        });
+
+        btn = findViewById(R.id.exitAccount);
+        btn.setOnClickListener(v -> {
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .requestEmail()
+                    .build();
+
+            GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+            FirebaseAuth.getInstance().signOut();
+
+            mGoogleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Intent intent = new Intent(getApplicationContext(), GoogleSignInActivity.class);
+                    startActivity(intent);
+                }
+            });
         });
     }
 

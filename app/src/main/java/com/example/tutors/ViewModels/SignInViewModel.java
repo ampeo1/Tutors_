@@ -1,14 +1,21 @@
 package com.example.tutors.ViewModels;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.example.tutors.Activity.MainActivity;
 import com.example.tutors.Helpers.FirebaseHelper;
 import com.example.tutors.Models.Guest;
+import com.example.tutors.Models.Student;
+import com.example.tutors.Models.Tutor;
+import com.example.tutors.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -36,9 +43,30 @@ public class SignInViewModel extends AndroidViewModel {
         return providers;
     }
 
-    public void setCurrentUser(FirebaseUser user){
+    public void setCurrentUser(FirebaseUser user, Context context){
         if (user != null && !isRegisteredUser(Objects.requireNonNull(user.getMetadata()))){
-            FirebaseHelper.addUser(new  Guest(user));
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            String[] items = context.getResources().getStringArray(R.array.typesUsers);
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (items[which].equals("Студент")){
+                        FirebaseHelper.addUser(new Student(user));
+                    }
+
+                    if (items[which].equals("Репетитор")){
+                        FirebaseHelper.addUser(new Tutor(user));
+                    }
+
+                    context.startActivity(new Intent(context, MainActivity.class));
+                }
+            });
+
+            builder.setCancelable(false);
+            builder.create().show();
+        }
+        else {
+            context.startActivity(new Intent(context, MainActivity.class));
         }
     }
 
