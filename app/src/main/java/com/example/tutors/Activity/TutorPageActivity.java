@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,31 +59,8 @@ public class TutorPageActivity extends AppCompatActivity {
             }
         }
 
-        Button btn = findViewById(R.id.btnBookLeasson);
-
-        FirebaseHelper.getUserById(FirebaseHelper.getIdCurrentUser()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot user: snapshot.getChildren()) {
-                    if (FirebaseHelper.getUserClass(user) != Student.class) {
-                        btn.setVisibility(View.INVISIBLE);
-                    }
-                    else {
-                        btn.setVisibility(View.VISIBLE);
-                        btn.setOnClickListener(v -> {
-                            Intent intent = new Intent(getApplicationContext(), BookLeassonActivity.class);
-                            intent.putExtra(Tutor.class.getSimpleName(),  tutor);
-                            startActivity(intent);
-                        });
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        Button btn = findViewById(R.id.btnBookTutor);
+        // todo invite
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
