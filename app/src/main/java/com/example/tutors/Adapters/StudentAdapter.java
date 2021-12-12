@@ -31,20 +31,28 @@ import java.util.List;
 public class StudentAdapter extends BaseAdapter {
     private Context ctx;
     private LayoutInflater lInflater;
-    private ArrayList<TutorsStudent> students;
+    private List<TutorsStudent> students;
 
-    public StudentAdapter(Context context, String currentUserId) {
+    public StudentAdapter(Context context, Query currentUser) {
         ctx = context;
         this.students = new ArrayList<>();
         lInflater = (LayoutInflater) ctx
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        FirebaseHelper.getUserById(currentUserId).addValueEventListener(new ValueEventListener() {
+        currentUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot studentSnapshots: snapshot.getChildren()) {
                     Tutor tutor = studentSnapshots.getValue(Tutor.class);
-                    students = tutor.students;
+                    if (tutor != null) {
+                        for (TutorsStudent tutorsStudent: tutor.students)
+                        {
+                            if (tutorsStudent.status)
+                            {
+                                students.add(tutorsStudent);
+                            }
+                        }
+                    }
                 }
 
                 notifyDataSetChanged();
@@ -120,18 +128,5 @@ public class StudentAdapter extends BaseAdapter {
         }
 
         return view;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private String getStringItems(String[] items_array_string,
-                                  List<ItemsTypes> itemsTypes)
-    {
-        List<String> resArray = new ArrayList<>();
-        for(ItemsTypes item: itemsTypes)
-        {
-            resArray.add(items_array_string[item.ordinal()]);
-        }
-
-        return String.join(", ", resArray);
     }
 }

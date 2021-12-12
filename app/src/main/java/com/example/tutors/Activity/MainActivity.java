@@ -39,25 +39,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String currentUserId = FirebaseHelper.getIdCurrentUser();
+/*        String currentUserId = FirebaseHelper.getIdCurrentUser();*/
+        //TODO
+        String currentUserId = "BnqNvVGOu9fPmDJ0OGoTl09eqBA3";
         FirebaseHelper.getUserById(currentUserId).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot userSnapshots: snapshot.getChildren()) {
-                    Tutor currentUser2 = (Tutor) userSnapshots.getValue(Tutor.class);
-                    TutorsStudent tutorsStudent = new TutorsStudent("BCPp7KtKl1hKnLAYzpCdkJXCpCC3", true);
-                    currentUser2.students = new ArrayList<>();
-                    currentUser2.students.add(tutorsStudent);
-                    FirebaseHelper.addUser(currentUser2);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                currentUser = null;
-            }
-
-/*            @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot userSnapshots: snapshot.getChildren()) {
                     Class<?> a = FirebaseHelper.getUserClass(userSnapshots);
@@ -77,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 currentUser = null;
-            }*/
+            }
+
         });
         setupButtons();
     }
