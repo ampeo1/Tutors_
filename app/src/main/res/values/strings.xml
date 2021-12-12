@@ -15,6 +15,5 @@
     <string-array name="typesUsers">
         <item>Репетитор</item>
         <item>Студент</item>
-        <item>Без роли</item>
     </string-array>
 </resources>

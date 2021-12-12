@@ -94,8 +94,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        viewModel.setCurrentUser(user);
-        startActivity(MainActivity.class);
+        viewModel.setCurrentUser(user, this);
     }
     // [END auth_with_google]
 

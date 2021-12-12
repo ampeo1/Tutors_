@@ -49,6 +49,7 @@ public class FirebaseHelper {
         HashMap<String, Object> map = new HashMap(){{
                 put(TYPE_PROPERTY_NAME, user.getClass().getName());
             }};
+        String id = user.getId();
         usersRef.child(user.getId()).setValue(user);
         usersRef.child(user.getId()).updateChildren(map);
     }
