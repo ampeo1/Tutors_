@@ -5,6 +5,7 @@ import com.firebase.ui.auth.data.model.PhoneNumber;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class Tutor extends AbstractUser {
 
     public float rating;
 
-    public ArrayList<TutorsStudent> students;
+    public List<TutorsStudent> students;
 
     public Tutor(String id, String firstName, String lastName, List<ItemsTypes> items, String phoneNumber, String description, String mail, String imagePath)
     {
@@ -31,7 +32,7 @@ public class Tutor extends AbstractUser {
         this.description = description;
         this.items = items;
         this.rating = 0.0f;
-        this.students = new ArrayList<TutorsStudent>();
+        this.students = new ArrayList<>();
     }
 
     public List<ItemsTypes> getItems()
@@ -43,10 +44,10 @@ public class Tutor extends AbstractUser {
         return this.items;
     }
 
-    public void addNewStudent(TutorsStudent student)
+/*    public void addNewStudent(TutorsStudent student)
     {
         this.students.add(student);
-    }
+    }*/
 
     public String getStringItems()
     {
