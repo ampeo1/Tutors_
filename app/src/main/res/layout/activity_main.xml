@@ -21,22 +21,29 @@
         android:layout_width="600px"
         android:layout_height="50dp"
         android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp"
         android:text="@string/btnSearchValue"
-        app:layout_constraintBottom_toTopOf="@+id/btnToLessonsPage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEditProfile"
-        app:layout_constraintVertical_bias="0.577" />
+        app:layout_constraintTop_toBottomOf="@+id/btnEditProfile" />
 
     <Button
         android:id="@+id/btnToLessonsPage"
         android:layout_width="600px"
         android:layout_height="50dp"
-        android:layout_marginBottom="252dp"
+        android:layout_marginTop="25dp"
         android:text="@string/btnToLessonPage"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSearch" />
+
+    <Button
+        android:id="@+id/exitAccount"
+        android:layout_width="600px"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:text="Выйти с аккаунта"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnToLessonsPage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
