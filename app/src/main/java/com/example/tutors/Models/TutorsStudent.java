@@ -4,6 +4,10 @@ public class TutorsStudent {
     public String studentId;
     public Boolean status;
 
+    public TutorsStudent() {
+
+    }
+    
     public TutorsStudent(String studentId, Boolean status)
     {
         this.studentId = studentId;
