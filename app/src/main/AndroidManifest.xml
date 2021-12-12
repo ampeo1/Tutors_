@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tutors">
         <activity
+            android:name=".Activity.StudentListActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.BookLeassonActivity"
             android:exported="true" />
         <activity

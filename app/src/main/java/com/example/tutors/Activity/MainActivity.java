@@ -17,6 +17,7 @@ import com.example.tutors.Models.Lesson;
 import com.example.tutors.Models.LessonStatus;
 import com.example.tutors.Models.Student;
 import com.example.tutors.Models.Tutor;
+import com.example.tutors.Models.TutorsStudent;
 import com.example.tutors.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +44,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot userSnapshots: snapshot.getChildren()) {
+                    Tutor currentUser2 = (Tutor) userSnapshots.getValue(Tutor.class);
+                    TutorsStudent tutorsStudent = new TutorsStudent("BCPp7KtKl1hKnLAYzpCdkJXCpCC3", true);
+                    currentUser2.students = new ArrayList<>();
+                    currentUser2.students.add(tutorsStudent);
+                    FirebaseHelper.addUser(currentUser2);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                currentUser = null;
+            }
+
+/*            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot userSnapshots: snapshot.getChildren()) {
                     Class<?> a = FirebaseHelper.getUserClass(userSnapshots);
                     if (a.toString().equals(Student.class.toString()))
                     {
@@ -60,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 currentUser = null;
-            }
+            }*/
         });
         setupButtons();
     }

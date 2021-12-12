@@ -11,6 +11,7 @@
     <string name="btnToLessonPage">Мои Уроки</string>
     <string name="btnSaveLessonChanges">Сохранить</string>
     <string name="btnEditProfile">Настройки профиля</string>
+    <string name="btnCreateLesson">Добавить урок</string>
     <string-array name="typesUsers">
         <item>Репетитор</item>
         <item>Студент</item>

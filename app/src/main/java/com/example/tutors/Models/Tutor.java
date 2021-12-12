@@ -22,6 +22,8 @@ public class Tutor extends AbstractUser {
 
     public float rating;
 
+    public ArrayList<TutorsStudent> students;
+
     public Tutor(String id, String firstName, String lastName, List<ItemsTypes> items, String phoneNumber, String description, String mail, String imagePath)
     {
         super(id, firstName, lastName, phoneNumber, mail, imagePath);
@@ -29,6 +31,7 @@ public class Tutor extends AbstractUser {
         this.description = description;
         this.items = items;
         this.rating = 0.0f;
+        this.students = new ArrayList<TutorsStudent>();
     }
 
     public List<ItemsTypes> getItems()
@@ -38,6 +41,11 @@ public class Tutor extends AbstractUser {
         }
 
         return this.items;
+    }
+
+    public void addNewStudent(TutorsStudent student)
+    {
+        this.students.add(student);
     }
 
     public String getStringItems()
