@@ -86,10 +86,10 @@
         app:layout_constraintTop_toBottomOf="@+id/twItemsInTutorPage" />
 
     <Button
-        android:id="@+id/btnBookLeasson"
+        android:id="@+id/btnBookTutor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Записаться на урок"
+        android:text="Записаться к репетитору"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
