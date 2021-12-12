@@ -1,9 +1,11 @@
 package com.example.tutors.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +50,6 @@ public class ProfileEditorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_editor);
         this.viewModel = new ViewModelProvider(this).get(ProfileEditorViewModel.class);
-        this.spinner = findViewById(R.id.typeUserSpinner);
 
         String currentUserId = FirebaseHelper.getIdCurrentUser();
         FirebaseHelper.getUserById(currentUserId).addValueEventListener(new ValueEventListener() {
@@ -56,9 +59,9 @@ public class ProfileEditorActivity extends AppCompatActivity {
                     if (viewModel.getUser() == null){
                         Class<?> userClass = FirebaseHelper.getUserClass(userSnapshots);
                         viewModel.setUser((AbstractUser) userSnapshots.getValue(userClass));
-                        int itemSelected = setupActivity(viewModel.getUser());
-                        setupSpinner(itemSelected);
                     }
+
+                    setupActivity(viewModel.getUser());
                 }
             }
 
@@ -89,36 +92,49 @@ public class ProfileEditorActivity extends AppCompatActivity {
         }
     }
 
-    private void setupStudentActivity(Student student){
+    private void setupUserActivity(AbstractUser student){
         setupBaseUserActivity(student);
+        hideView(R.id.addSubject);
         hideView(R.id.etDescriptionInEditPage);
-    }
-
-    private void setupGuestActivity(Guest guest){
-        setupBaseUserActivity(guest);
-        hideView(R.id.etDescriptionInEditPage);
+        hideView(R.id.subjectsListView);
     }
 
     private void setupTutorActivity(Tutor tutor){
         setupBaseUserActivity(tutor);
-        findViewById(R.id.etDescriptionInEditPage).setVisibility(View.VISIBLE);
+
+        ListView listView = (ListView) findViewById(R.id.subjectsListView);
+        listView.setAdapter(viewModel.createAdapter(this));
+
+        Button btn = (Button) findViewById(R.id.addSubject);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(v.getContext());
+                String[] items = getResources().getStringArray(R.array.items_array_rus);
+                dialogBuilder.setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        for (ItemsTypes item: ItemsTypes.values()){
+                            if (item.getSubject().equals(items[which])){
+                                viewModel.addSubject(item);
+                                listView.deferNotifyDataSetChanged();
+                            }
+                        }
+                    }
+                });
+                dialogBuilder.setTitle("Выбор предмета");
+                dialogBuilder.create().show();
+            }
+        });
     }
 
-    private int setupActivity(AbstractUser user) {
+    private void setupActivity(AbstractUser user) {
         if (user instanceof Tutor) {
             setupTutorActivity((Tutor)user);
-            return 0;
         }
-        if (user instanceof Guest) {
-            setupGuestActivity((Guest)user);
-            return 2;
+        else {
+            setupUserActivity(user);
         }
-        if (user instanceof Student) {
-            setupStudentActivity((Student)user);
-            return 1;
-        }
-
-        return 2;
     }
 
     private void saveUser(){
@@ -153,35 +169,6 @@ public class ProfileEditorActivity extends AppCompatActivity {
         setTextView(R.id.etLastNameInEditPage, user.getLastName());
         setTextView(R.id.etPhoneNumberInEditPage, user.getPhoneNumber());
         setUserAvatar(user.getImagePath());
-    }
-
-    private void setupSpinner(int itemSelected){
-        ArrayAdapter<?> adapter = ArrayAdapter.createFromResource(this, R.array.typesUsers, android.R.layout.simple_spinner_dropdown_item);
-        Spinner spinner = findViewById(R.id.typeUserSpinner);
-        spinner.setAdapter(adapter);
-        spinner.setSelection(itemSelected);
-        this.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                AbstractUser oldUser = viewModel.getUser();
-                if (position == 0) {
-                    viewModel.setUser(new Tutor(oldUser.getId(), oldUser.getFirstName(), oldUser.getLastName(), Arrays.asList(ItemsTypes.MATHS), oldUser.getPhoneNumber(), "", oldUser.getMail(), oldUser.getImagePath()));
-                }
-                if (position == 1){
-                    viewModel.setUser(new Student(oldUser.getId(), oldUser.getFirstName(), oldUser.getLastName(), oldUser.getPhoneNumber(), oldUser.getMail(), oldUser.getImagePath()));
-                }
-                if (position == 2){
-                    viewModel.setUser(new Guest(oldUser.getId(), oldUser.getFirstName(), oldUser.getLastName(), oldUser.getPhoneNumber(), oldUser.getMail(), oldUser.getImagePath()));
-                }
-
-                setupActivity(viewModel.getUser());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
 
     private void setTextView(int idEditText, String value) {

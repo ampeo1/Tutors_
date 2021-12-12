@@ -5,6 +5,7 @@ import com.firebase.ui.auth.data.model.PhoneNumber;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @IgnoreExtraProperties
@@ -32,6 +33,10 @@ public class Tutor extends AbstractUser {
 
     public List<ItemsTypes> getItems()
     {
+        if (this.items == null) {
+            this.items = new ArrayList<ItemsTypes>();
+        }
+
         return this.items;
     }
 
