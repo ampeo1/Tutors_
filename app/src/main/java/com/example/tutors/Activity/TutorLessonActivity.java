@@ -28,7 +28,9 @@ public class TutorLessonActivity extends AppCompatActivity {
 
     private void setupListView() {
         ListView listView = findViewById(R.id.listViewTutorLesson);
-        String currentUserId = FirebaseHelper.getIdCurrentUser();
+        //TODO
+/*        String currentUserId = FirebaseHelper.getIdCurrentUser();*/
+        String currentUserId = "BnqNvVGOu9fPmDJ0OGoTl09eqBA3";
         TutorLessonAdapter studentLessonAdapter = new TutorLessonAdapter(this, FirebaseHelper.getLessonByTutorId(currentUserId));
         listView.setAdapter(studentLessonAdapter);
     }

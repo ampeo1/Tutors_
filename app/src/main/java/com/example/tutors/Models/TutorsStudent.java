@@ -4,11 +4,12 @@ public class TutorsStudent {
     public String studentId;
     public Boolean status;
 
-    public TutorsStudent() {
+    public TutorsStudent()
+    {
 
     }
-    
-    public TutorsStudent(String studentId, Boolean status)
+
+    public TutorsStudent(Boolean status, String studentId)
     {
         this.studentId = studentId;
         this.status = status;
